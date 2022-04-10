@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 body {
   height: 100vh;
   width: 100%;
@@ -29,7 +31,15 @@ body {
   color: white;
   top: 9rem;
   left: 15rem;
+}
+
+#botao{
+  font-size: xx-large;
+  font-family: "VT323", sans-serif;
+  width: 100px;
+  height: 60px;
   cursor: pointer;
+  border-radius: 0.4ex;
 }
 
 .player-shooter {
