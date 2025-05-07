@@ -8,15 +8,40 @@
     <title>Space Shooter</title>
   </head>
   <body>
-    <div id="main-play-area">
-      <img class="player-shooter" src="./img/hero.png" alt="hero" />
-      <h4 class="game-instructions">
-        Não deixe os aliens invadirem o seu planeta!
-      </h4>
-      <div class="start-button">
-        <h1><input type="button" value="START" id="botao"> </h1>
+    <div id="game-modal" class="modal">
+      <div class="modal-content">
+        <h2 class="game-title">Space Shooter</h2>
+        <p class="game-instructions">
+          Não deixe os aliens invadirem o seu planeta!<br>
+          Use as setas ou W/S para mover a nave<br>
+          Barra de espaço para atirar
+        </p>
+        <div class="button-container">
+          <button id="start-button" class="start-button">START</button>
+        </div>
       </div>
     </div>
+
+    <div id="gameover-modal" class="modal">
+      <div class="modal-content gameover-content">
+        <h2 class="game-title">Game Over</h2>
+        <p class="game-instructions">
+          Perdemos, avise os Encanadores!
+        </p>
+        <div class="button-container">
+          <button id="restart-button" class="start-button">JOGAR NOVAMENTE</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="main-play-area">
+      <img class="player-shooter" src="./img/hero.png" alt="hero" />
+    </div>
+    
+    <footer class="footer">
+      <p class="author">Desenvolvido por <a href="https://github.com/camilasena-a" target="_blank" class="author-link">Camila Sena</a></p>
+    </footer>
+    
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>

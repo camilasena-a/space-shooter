@@ -6,14 +6,17 @@ const aliensImg = [
   "img/monster-3.png",
 ];
 const instructionsText = document.querySelector(".game-instructions");
-const startButton = document.querySelector(".start-button");
+const gameModal = document.querySelector("#game-modal");
+const gameOverModal = document.querySelector("#gameover-modal");
+const startButton = document.querySelector("#start-button");
+const restartButton = document.querySelector("#restart-button");
 let alienInterval;
 
 function flyShip(event) {
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" || event.key.toLowerCase() === "w") {
     event.preventDefault();
     moveUp();
-  } else if (event.key === "ArrowDown") {
+  } else if (event.key === "ArrowDown" || event.key.toLowerCase() === "s") {
     event.preventDefault();
     moveDown();
   } else if (event.key === " ") {
@@ -138,9 +141,13 @@ startButton.addEventListener("click", (event) => {
   playGame();
 });
 
+restartButton.addEventListener("click", (event) => {
+  playGame();
+});
+
 function playGame() {
-  startButton.style.display = "none";
-  instructionsText.style.display = "none";
+  gameModal.style.display = "none";
+  gameOverModal.style.display = "none";
   window.addEventListener("keydown", flyShip);
   alienInterval = setInterval(() => {
     createAliens();
@@ -154,10 +161,9 @@ function gameOver() {
   aliens.forEach((alien) => alien.remove());
   let lasers = document.querySelectorAll(".laser");
   lasers.forEach((laser) => laser.remove());
+  
   setTimeout(() => {
-    alert("Perdemos, avise os Encanadores!");
     yourShip.style.top = "250px";
-    startButton.style.display = "block";
-    instructionsText.style.display = "block";
-  });
+    gameOverModal.style.display = "flex";
+  }, 500);
 }

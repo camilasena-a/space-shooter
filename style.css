@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+:root {
+  --neon-blue: #05d9e8;
+  --neon-purple: #d300c5;
+  --space-bg: #000000;
+}
+
 body {
   height: 100vh;
   width: 100%;
@@ -9,37 +15,189 @@ body {
   padding: 0;
   margin: 0;
   font-family: sans-serif;
-  background-color: rgb(5, 5, 7);
+  background-color: var(--space-bg);
+  background-image: 
+    linear-gradient(45deg, rgba(5, 217, 232, 0.1) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(211, 0, 197, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, 
+      rgba(5, 217, 232, 0.1) 0%,
+      transparent 50%),
+    radial-gradient(circle at 80% 20%, 
+      rgba(211, 0, 197, 0.1) 0%,
+      transparent 50%);
+  background-size: 30px 30px, 30px 30px, 100% 100%, 100% 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(5, 217, 232, 0.05) 2px,
+      rgba(5, 217, 232, 0.05) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(211, 0, 197, 0.05) 2px,
+      rgba(211, 0, 197, 0.05) 4px
+    );
+  pointer-events: none;
+  animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
 }
 
 #main-play-area {
-  background-color: black;
+  background-color: #1f2937;
   background-image: url(img/space.png);
   height: 600px;
   width: 600px;
+  position: relative;
+  border: 2px solid var(--neon-blue);
+  box-shadow: 
+    0 0 20px var(--neon-blue),
+    inset 0 0 20px var(--neon-blue);
+}
+
+#main-play-area::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: 
+    radial-gradient(circle at 50% 50%, 
+      transparent 0%,
+      var(--neon-blue) 10%,
+      transparent 20%),
+    radial-gradient(circle at 30% 30%, 
+      transparent 0%,
+      var(--neon-purple) 15%,
+      transparent 30%),
+    radial-gradient(circle at 70% 70%, 
+      transparent 0%,
+      var(--neon-blue) 12%,
+      transparent 25%);
+  background-size: 100% 100%;
+  z-index: -1;
+  animation: pulse-glow 3s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+#main-play-area::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid var(--neon-blue);
+  z-index: -1;
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 10px var(--neon-blue);
+    border-color: var(--neon-blue);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--neon-blue), 0 0 20px var(--neon-purple);
+    border-color: var(--neon-purple);
+  }
+  100% {
+    box-shadow: 0 0 10px var(--neon-blue);
+    border-color: var(--neon-blue);
+  }
 }
 
 .game-instructions {
-  position: relative;
-  color: white;
-  left: 7rem;
-  top: 0px;
+  color: var(--neon-purple);
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+  text-shadow: 0 0 5px var(--neon-purple);
+  word-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-instructions br {
+  display: block;
+  content: "";
+  margin: 0.5rem 0;
+}
+
+.button-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .start-button {
-  position: relative;
-  color: white;
-  top: 9rem;
-  left: 15rem;
+  background: transparent;
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  padding: 0.8rem 2rem;
+  font-size: 1.5rem;
+  font-family: 'VT323', monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+  width: auto;
+  min-width: 120px;
+  max-width: 200px;
+  text-align: center;
+  margin: 0;
+  display: inline-block;
 }
 
-#botao{
-  font-size: xx-large;
-  font-family: "VT323", sans-serif;
-  width: 100px;
-  height: 60px;
-  cursor: pointer;
-  border-radius: 0.4ex;
+.start-button:hover {
+  background: var(--neon-blue);
+  color: var(--space-bg);
+  box-shadow: 0 0 20px var(--neon-blue);
+  transform: scale(1.05);
 }
 
 .player-shooter {
@@ -72,4 +230,165 @@ body {
   width: 70px;
   position: relative;
   opacity: 0;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: var(--space-bg);
+  padding: 2.5rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 2px solid var(--neon-blue);
+  box-shadow: 
+    0 0 20px var(--neon-blue),
+    inset 0 0 20px var(--neon-blue);
+  animation: modal-pulse 2s ease-in-out infinite;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.game-title {
+  color: var(--neon-blue);
+  font-family: 'VT323', monospace;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px var(--neon-blue);
+  word-wrap: break-word;
+  padding: 0 1rem;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+.game-instructions {
+  color: var(--neon-purple);
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-shadow: 0 0 5px var(--neon-purple);
+  word-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+@keyframes modal-pulse {
+  0% {
+    box-shadow: 0 0 20px var(--neon-blue);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--neon-blue), 0 0 20px var(--neon-purple);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--neon-blue);
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 999;
+}
+
+.author {
+  color: var(--neon-blue);
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  text-shadow: 0 0 5px var(--neon-purple);
+  margin: 0;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border-left: 2px solid var(--neon-purple);
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 5px var(--neon-blue);
+  }
+  50% {
+    text-shadow: 0 0 10px var(--neon-blue), 0 0 15px var(--neon-purple);
+  }
+}
+
+.gameover-content {
+  border-color: var(--neon-purple);
+  box-shadow: 
+    0 0 20px var(--neon-purple),
+    inset 0 0 20px var(--neon-purple);
+  animation: gameover-pulse 1.5s ease-in-out infinite;
+}
+
+#gameover-modal {
+  display: none;
+}
+
+@keyframes gameover-pulse {
+  0% {
+    box-shadow: 0 0 20px var(--neon-purple);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--neon-purple), 0 0 40px var(--neon-purple);
+  }
+  100% {
+    box-shadow: 0 0 20px var(--neon-purple);
+  }
+}
+
+.author-link {
+  color: var(--neon-blue);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--space-bg);
+}
+
+.author-link:hover {
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue), 0 0 15px var(--neon-blue);
+}
+
+.author-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--neon-blue);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--neon-blue);
+}
+
+.author-link:hover::after {
+  width: 100%;
 }
